@@ -1,0 +1,36 @@
+{
+    "name": "silverstripe/silverstripe-search-sdk",
+    "description": "A Software Development Kit for Silverstripe Search",
+    "type": "metapackage",
+    "license": "BSD-3-Clause",
+    "homepage": "https://github.com/silverstripeltd/silverstripe-search-sdk",
+    "authors": [
+        {
+            "name": "Christopher David Penny",
+            "email": "chris.penny@gmail.com"
+        },
+        {
+            "name": "Bernard Hamlin",
+            "email": "bernie@silverstripe.com"
+        }
+    ],
+    "keywords": [
+        "Silverstripe",
+        "Silverstripe CMS",
+        "Search",
+        "Search Service"
+    ],
+    "require": {
+        "php": "^8.1",
+        "silverstripe/framework": "^5",
+        "silverstripe/silverstripe-discoverer": "1.0.0",
+        "silverstripe/silverstripe-discoverer-bifrost": "1.0.0",
+        "silverstripe/silverstripe-discoverer-elastic-enterprise": "1.0.0",
+        "silverstripe/silverstripe-forager": "1.0.0",
+        "silverstripe/silverstripe-forager-bifrost": "1.0.0",
+        "silverstripe/silverstripe-forager-elastic-enterprise": "1.0.0",
+        "silverstripe/silverstripe-discoverer-search-ui": "0.1.0-alpha"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

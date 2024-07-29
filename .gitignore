@@ -1,0 +1,16 @@
+#OS
+.DS_Store
+
+# IDE
+.vscode
+.idea
+
+# PHP
+composer.lock
+vendor
+.phpunit.result.cache
+
+#silverstripe
+.env
+public
+/resources
