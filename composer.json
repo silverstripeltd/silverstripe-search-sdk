@@ -18,11 +18,13 @@
         "Silverstripe",
         "Silverstripe CMS",
         "Search",
-        "Search Service"
+        "Search Service",
+        "Search Service SDK",
+        "Development Kit",
+        "Software Development Kit"
     ],
     "require": {
         "php": "^8.1",
-        "silverstripe/framework": "^5",
         "silverstripe/silverstripe-discoverer": "1.0.0",
         "silverstripe/silverstripe-discoverer-bifrost": "1.0.0",
         "silverstripe/silverstripe-discoverer-elastic-enterprise": "1.0.0",
