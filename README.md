@@ -56,21 +56,18 @@ There are a range of options for you to customise your indexing to get the most 
 > [!WARNING]
 > Once you add a field to an index you cannot change its name or type without deleting the engine so choose field names carefully
 
-## 🛼 Roll-your-own installation
+### Next steps
 
-If you want to dial in your installation you can manually add the packages in the following groups:
-
-### Querying
-
-The [silverstripe/silverstripe-discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module contains provider-agnostic interfaces for performing search queries, including filtering and faceting. The [silverstripe/silverstripe-discoverer-bifrost](https://github.com/silverstripeltd/silverstripe-discoverer-bifrost) contains Silverstripe Search specific implementation to connect you with our Bifröst API. 
-
-Refer to the [silverstripe/silverstripe-discoverer docs](https://github.com/silverstripeltd/silverstripe-discoverer) for more information on its use.
+From here we recommend looking into the individual modules installed by this SDK
+- [how to get content into your search engine](#search-content-management)
+- [getting the Search UI going](#search-ui)
+- [customising your search queries](#querying)
 
 ### Search Content management
 
 The [silverstripe/silverstripe-forager](https://github.com/silverstripeltd/silverstripe-forager) module contains provider-agnostic interfaces and admin UI for configuring the service and index management. The [silverstripe/silverstripe-forager-bifrost](https://github.com/silverstripeltd/silverstripe-forager-bifrost) contains Silverstripe Search specific implementation to connect you with our Bifröst API. 
 
-Refer to the [silverstripe/silverstripe-forager docs](https://github.com/silverstripeltd/silverstripe-forager) for more information on its use.
+Refer to the [silverstripe/silverstripe-forager docs](https://github.com/silverstripeltd/silverstripe-forager) for detailed information.
 
 ### Search UI
 
@@ -81,3 +78,14 @@ The [silverstripe/silverstripe-discoverer-search-ui](https://github.com/silverst
 The [silverstripe/silverstripe-discoverer-search-ui](https://github.com/silverstripe/silverstripe-discoverer-search-ui) package contains a base Search Page Type, Controller and Templates that work with the [discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) and [forager](https://github.com/silverstripeltd/silverstripe-forager) modules. You can use the CMS to add the new Page Type to get up and running quickly.
 
 To customise the look and feel of your search page then check out the [silverstripe/silverstripe-discoverer-search-ui](https://github.com/silverstripe/silverstripe-discoverer-search-ui) docs. If you would like to add filters or other advance query options then head over to the [discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module. 
+
+### Querying
+
+The [silverstripe/silverstripe-discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module contains provider-agnostic interfaces for performing search queries, including filtering and faceting. The [silverstripe/silverstripe-discoverer-bifrost](https://github.com/silverstripeltd/silverstripe-discoverer-bifrost) contains Silverstripe Search specific implementation to connect you with our Bifröst API. 
+
+Refer to the [silverstripe/silverstripe-discoverer docs](https://github.com/silverstripeltd/silverstripe-discoverer) for more information on its use.
+
+
+## 🛼 Roll-your-own installation
+
+If you want to dial in your installation you can manually add the packages above to your composer.json. For example, if you only need the query module to integrate with your existing page types you could just install the [silverstripe/silverstripe-discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module and the bifrost dependency: `composer require silverstripe/silverstripe-discoverer silverstripe/silverstripe-discoverer-bifrost`
