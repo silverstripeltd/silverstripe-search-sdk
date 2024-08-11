@@ -26,10 +26,10 @@
     "require": {
         "php": "^8.1",
         "silverstripe/silverstripe-discoverer": "1.0.0",
-        "silverstripe/silverstripe-discoverer-bifrost": "1.0.0",
+        "silverstripe/silverstripe-discoverer-bifrost": "1.0.1",
         "silverstripe/silverstripe-discoverer-elastic-enterprise": "1.0.0",
         "silverstripe/silverstripe-forager": "1.0.0",
-        "silverstripe/silverstripe-forager-bifrost": "1.0.1",
+        "silverstripe/silverstripe-forager-bifrost": "1.0.2",
         "silverstripe/silverstripe-forager-elastic-enterprise": "1.0.0",
         "silverstripe/silverstripe-discoverer-search-ui": "0.1.0-alpha"
     },
