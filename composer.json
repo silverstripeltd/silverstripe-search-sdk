@@ -30,7 +30,7 @@
         "silverstripe/silverstripe-discoverer-elastic-enterprise": "1.1.0",
         "silverstripe/silverstripe-discoverer-search-ui": "0.2.0-alpha",
         "silverstripe/silverstripe-forager": "1.0.0",
-        "silverstripe/silverstripe-forager-bifrost": "1.0.2",
+        "silverstripe/silverstripe-forager-bifrost": "1.0.3",
         "silverstripe/silverstripe-forager-elastic-enterprise": "1.0.0"
     },
     "minimum-stability": "dev",
