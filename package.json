@@ -1,0 +1,7 @@
+{
+    "name": "silverstripe-search-sdk",
+    "description": "Silverstripe Search Software Development Kit",
+    "main": "README.md",
+    "repository": "https://github.com/silverstripeltd/silverstripe-search-sdk.git",
+    "author": "Silverstripe Ltd"
+  }
