@@ -17,6 +17,14 @@ To install the complete SDK run
 composer require silverstripe/silverstripe-search-sdk
 ```
 
+## Updates
+
+To update the SDK, be sure to include `-W` / `--with-all-dependencies`
+
+```
+composer update silverstripe/silverstripe-search-sdk -W
+```
+
 ## Using the SDK
 
 ### Environment variables
