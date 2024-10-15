@@ -25,10 +25,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "silverstripe/silverstripe-discoverer": "1.1.1",
+        "silverstripe/silverstripe-discoverer": "1.2.0",
         "silverstripe/silverstripe-discoverer-bifrost": "1.1.0",
-        "silverstripe/silverstripe-discoverer-elastic-enterprise": "1.1.0",
-        "silverstripe/silverstripe-discoverer-search-ui": "0.2.1-alpha",
+        "silverstripe/silverstripe-discoverer-elastic-enterprise": "1.1.1",
+        "silverstripe/silverstripe-discoverer-search-ui": "0.2.2-alpha",
         "silverstripe/silverstripe-forager": "1.0.0",
         "silverstripe/silverstripe-forager-bifrost": "1.0.4",
         "silverstripe/silverstripe-forager-elastic-enterprise": "1.0.0"
