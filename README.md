@@ -2,6 +2,43 @@
 
 Silverstripe Search is designed to integrate easily with the Silverstripe CMS. This Software Development Kit (SDK) is a one-stop-shop for getting your application integrated.
 
+<!-- TOC -->
+* [🧰 Silverstripe Search SDK](#-silverstripe-search-sdk)
+  * [Tagged dependencies](#tagged-dependencies)
+  * [Engine vs Index](#engine-vs-index)
+  * [Setting up](#setting-up)
+  * [Installation](#installation)
+    * [Install the complete SDK run:](#install-the-complete-sdk-run)
+    * [Updates](#updates)
+    * [🛼 Roll-your-own installation](#-roll-your-own-installation)
+  * [Specify environment variables](#specify-environment-variables)
+    * [Understanding your engine prefix and suffix:](#understanding-your-engine-prefix-and-suffix)
+  * [Indexing your CMS content](#indexing-your-cms-content)
+  * [Get search to your users](#get-search-to-your-users)
+<!-- TOC -->
+
+## Tagged dependencies
+
+As part of the Silverstripe Search managed service, we will put the required dependencies (and the explicit versions) through our internal regression testing before adding them to this SDK.
+
+This means that new tags for the SDK **will be slower** than new tags being made on these dependencies. The dependencies (like Forager and Discoverer) are open source/community modules, so they can have contributes coming in faster than we can regression test.
+
+**If you want updates to dependencies faster**, then you should define your own requirements for those dependencies with your own version constraints. By doing so, you accept the risks of your defined versioned constraints.
+
+## Engine vs Index
+
+> [!IMPORTANT]
+> **TL;DR:**\
+> For all intents and purposes, "engine" and "index" are synonomous. If we refer to something as "engine", but the Discoverer module is asking for an "index", then you simply need to give it the data you have for your engine.
+
+The Discoverer module is built to be service-agnostic; meaning, you can use it with any search provider, as long as
+there is an adaptor (like this module) for that service.
+
+When Discoverer refers to an "index", it is talking about the data store used for housing your content. These data
+stores are known by different names across different search providers. Algolia and Elasticsearch call them "indexes",
+Typesense calls them "collections", App Search calls them "engines". Discoverer had to call them **something** in its
+code, and it chose to call then "indexes"; Silverstripe Search, however, calls them "engines".
+
 ## Setting up
 
 Before you can get stared with this SDK you will need:
@@ -11,13 +48,29 @@ Before you can get stared with this SDK you will need:
 
 ## Installation
 
-To install the complete SDK run
+There are 3 core parts to the SDK:
 
-```
+1. **Indexing:** Getting your CMS content indexed into the search engine
+   - Provided by the [Forager](https://github.com/silverstripeltd/silverstripe-forager) module 
+2. **Querying:** Searching the indexed content in your search engine
+   - Provided by the [Discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module 
+3. **Search UI:** A default implementation of a search results page with basic control over search options, designed to get you up and running quickly if you have basic search requirements
+   - Provided by the [Discoverer > Search UI](https://github.com/silverstripeltd/silverstripe-discoverer-search-ui) module 
+
+**1. Indexing** and **2. Querying** are likely to be requirements for most projects, but **3. Search UI** potentially **isn't**. Some reasons why you might not want the Search UI include:
+
+* You are using Subsites
+* You are using Fluent
+* You perform your search queries through JavaScript/XHR
+* You have other complex search requirements that aren't covered by the Search UI module
+
+### Install the complete SDK run:
+
+```shell
 composer require silverstripe/silverstripe-search-sdk
 ```
 
-## Updates
+### Updates
 
 To update the SDK, be sure to include `-W` / `--with-all-dependencies`
 
@@ -25,13 +78,18 @@ To update the SDK, be sure to include `-W` / `--with-all-dependencies`
 composer update silverstripe/silverstripe-search-sdk -W
 ```
 
-## Using the SDK
+### 🛼 Roll-your-own installation
 
-### Environment variables
+If you want to dial in your installation you can manually add the packages above to your composer.json.
 
-To get started you will need to add the Bifröst environment variables (provided when you sign up for Silverstripe Search). 
+- If you only want **1. Indexing**, then you could require just the Forager dependencies
+- If you only want **2. Querying**, then you could require just the Discoverer dependencies
 
-For local development this is normally done in your `.env` file and should look like the following:
+It will be up to you what version constraints you apply, but noting again, only the versions required in this repository have gone through our regression testing process.
+
+## Specify environment variables
+
+To integrate with Silverstripe Search, define environment variables containing your endpoint, engine prefix, management API key, and query API key.
 
 ```
 BIFROST_ENDPOINT=<< provided on sign up >>
@@ -40,60 +98,40 @@ BIFROST_MANAGEMENT_API_KEY=<< provided on sign up >>
 BIFROST_QUERY_API_KEY=<< provided on sign up >>
 ```
 
-For Silverstripe Cloud, you should add `BIFROST_ENDPOINT` and `BIFROST_ENGINE_PREFIX` as Variables, and `BIFROST_MANAGEMENT_API_KEY` and `BIFROST_QUERY_API_KEY` should be added as Secrets.
+> [!TIP]
+> For Silverstripe Cloud clients:
+> - `BIFROST_ENDPOINT` and `BIFROST_ENGINE_PREFIX` should be added as Variables
+> - `BIFROST_MANAGEMENT_API_KEY` and `BIFROST_QUERY_API_KEY` should be added as Secrets.
 
-### Configuration
+### Understanding your engine prefix and suffix:
 
-You will also need to set up an initial index config file. We suggest using `app/_config/search.yml` so its easy to find later. A simple index that just indexes Page titles would look like:
+* All Silverstripe Search engine names follow a 4 slug format like this: `search-<subscription>-<environment>-<suffix>`
+* Your `<engine-prefix>` is everything except `-<suffix>`; so, it's just `search-<subscription>-<environment>`
 
-```YAML
-SilverStripe\Forager\Service\IndexConfiguration:
-  indexes:
-    main:
-      includeClasses:
-        SilverStripe\CMS\Model\SiteTree:
-          fields:
-            title:
-              property: Title
-``` 
+For example:
 
-Here the name of the index variant is `main`. This is added to your `BIFROST_ENGINE_PREFIX` to give the full name of your index. E.g. if the `BIFROST_ENGINE_PREFIX=search-acme-prod` then this index's full name is `search-acme-prod-main`.
+| Engine                    | Engine prefix        | Engine suffix |
+|---------------------------|----------------------|---------------|
+| search-acmecorp-prod-main | search-acmecorp-prod | main          |
+| search-acmecorp-prod-inc  | search-acmecorp-prod | inc           |
+| search-acmecorp-uat-main  | search-acmecorp-uat  | main          |
+| search-acmecorp-uat-inc   | search-acmecorp-uat  | inc           |
 
-There are a range of options for you to customise your indexing to get the most out of your content. Refer to the [Forager configuration docs](https://github.com/silverstripeltd/silverstripe-forager/blob/1.0.0/docs/en/configuration.md) for more information. 
+**Why?**
 
-> [!WARNING]
-> Once you add a field to an index you cannot change its name or type without deleting the engine so choose field names carefully
+Because you probably have more than one environment type that you're running search on (e.g. Production and UAT), and (generally speaking) you should have different engines for each of those environments. So, you can't just hardcode the entire engine name into your project, because that code doesn't change between environments.
 
-### Next steps
+Whenever you make a query, Forager and Discoverer will ask you for the "index" name; you will actually want to provide only the `<suffix>`. We will then take `BIFROST_ENGINE_PREFIX` and your `<suffix>`, put them together, and that's what will be queried. This allows you to set `BIFROST_ENGINE_PREFIX` differently for each environment, while having your `<suffix>` hardcoded in your project.
 
-From here we recommend looking into the individual modules installed by this SDK
-- [how to get content into your search engine](#search-content-management)
-- [getting the Search UI going](#search-ui)
-- [customising your search queries](#querying)
+## Indexing your CMS content
 
-### Search Content management
+Please see the [Forager > Bifröst](https://github.com/silverstripeltd/silverstripe-forager-bifrost?tab=readme-ov-file#configuration) documentation for details on how to get set up with indexing your content.
 
-The [silverstripe/silverstripe-forager](https://github.com/silverstripeltd/silverstripe-forager) module contains provider-agnostic interfaces and admin UI for configuring the service and index management. The [silverstripe/silverstripe-forager-bifrost](https://github.com/silverstripeltd/silverstripe-forager-bifrost) contains Silverstripe Search specific implementation to connect you with our Bifröst API. 
+## Get search to your users
 
-Refer to the [silverstripe/silverstripe-forager docs](https://github.com/silverstripeltd/silverstripe-forager) for detailed information.
+You may or may not want to use the [Discoverer > Search UI](https://github.com/silverstripeltd/silverstripe-discoverer-search-ui) module, **if you don't want to use it**, then the Discoverer module has quite a bit of documentation regarding how you can get your search form and results in front of your users; including an example `SearchResults` Page and Controller:
 
-### Search UI
-
-The [silverstripe/silverstripe-discoverer-search-ui](https://github.com/silverstripeltd/silverstripe-discoverer-search-ui) module contains the base parts to show results on a Search page including a Page Type, Controller, templates, and basic styling.
-
-### Search page and results
-
-The [silverstripe/silverstripe-discoverer-search-ui](https://github.com/silverstripeltd/silverstripe-discoverer-search-ui) package contains a base Search Page Type, Controller and Templates that work with the [discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) and [forager](https://github.com/silverstripeltd/silverstripe-forager) modules. You can use the CMS to add the new Page Type to get up and running quickly.
-
-To customise the look and feel of your search page then check out the [silverstripe/silverstripe-discoverer-search-ui](https://github.com/silverstripeltd/silverstripe-discoverer-search-ui) docs. If you would like to add filters or other advance query options then head over to the [discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module. 
-
-### Querying
-
-The [silverstripe/silverstripe-discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module contains provider-agnostic interfaces for performing search queries, including filtering and faceting. The [silverstripe/silverstripe-discoverer-bifrost](https://github.com/silverstripeltd/silverstripe-discoverer-bifrost) contains Silverstripe Search specific implementation to connect you with our Bifröst API. 
-
-Refer to the [silverstripe/silverstripe-discoverer docs](https://github.com/silverstripeltd/silverstripe-discoverer) for more information on its use.
-
-
-## 🛼 Roll-your-own installation
-
-If you want to dial in your installation you can manually add the packages above to your composer.json. For example, if you only need the query module to integrate with your existing page types you could just install the [silverstripe/silverstripe-discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module and the bifrost dependency: `composer require silverstripe/silverstripe-discoverer silverstripe/silverstripe-discoverer-bifrost`
+* [Discoverer > Bifröst](https://github.com/silverstripeltd/silverstripe-discoverer-bifrost?tab=readme-ov-file#usage) documentation for details on how to start querying the indexed content from your engines.
+* [Simple usage](https://github.com/silverstripeltd/silverstripe-discoverer/blob/main/docs/simple-usage.md): An example `SearchResults` Page, Controller, and template, with a basic query example with pagination and  result fields
+* [Detailed querying](https://github.com/silverstripeltd/silverstripe-discoverer/blob/main/docs/detailed-querying.md): How to query with filters, search fields, result fields, facets, etc
+* [Detailed result handling](https://github.com/silverstripeltd/silverstripe-discoverer/blob/main/docs/detailed-result-handling.md): More information about the `Results` object that Discoverer returns to you whenever you perform a search query
