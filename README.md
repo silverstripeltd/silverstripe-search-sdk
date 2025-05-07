@@ -21,7 +21,7 @@ Silverstripe Search is designed to integrate easily with the Silverstripe CMS. T
 
 As part of the Silverstripe Search managed service, we will put the required dependencies (and the explicit versions) through our internal regression testing before adding them to this SDK.
 
-This means that new tags for the SDK **will be slower** than new tags being made on these dependencies. The dependencies (like Forager and Discoverer) are open source/community modules, so they can have contributes coming in faster than we can regression test.
+This means that new tags for the SDK **will trail** tags being made on the upstream dependencies to ensure they are stable and work well with the service.
 
 **If you want updates to dependencies faster**, then you should define your own requirements for those dependencies with your own version constraints. By doing so, you accept the risks of your defined versioned constraints.
 
@@ -31,13 +31,11 @@ This means that new tags for the SDK **will be slower** than new tags being made
 > **TL;DR:**\
 > For all intents and purposes, "engine" and "index" are synonomous. If we refer to something as "engine", but the Discoverer module is asking for an "index", then you simply need to give it the data you have for your engine.
 
-The Discoverer module is built to be service-agnostic; meaning, you can use it with any search provider, as long as
-there is an adaptor (like this module) for that service.
+The Discoverer and Forager modules are built to be service-agnostic; meaning, you can use them with any search provider, as long as there is an adaptor for that service.
 
-When Discoverer refers to an "index", it is talking about the data store used for housing your content. These data
-stores are known by different names across different search providers. Algolia and Elasticsearch call them "indexes",
-Typesense calls them "collections", App Search calls them "engines". Discoverer had to call them **something** in its
-code, and it chose to call then "indexes"; Silverstripe Search, however, calls them "engines".
+When Discoverer refers to an "index", it is talking about the data store used for housing your content. These data stores are known by different names across different search providers. Algolia and Elasticsearch call them "indexes", Typesense calls them "collections", App Search calls them "engines". Discoverer had to call them **something** in its code, and it chose to call then "indexes"; Silverstripe Search, however, calls them "engines".
+
+Actions apply in the same way to all of the above. In Silverstripe Search, the action of "indexing" is the action of adding data to your engine, where it is said to be "indexed". Updating that data is commonly referred to as "re-indexing".
 
 ## Setting up
 
