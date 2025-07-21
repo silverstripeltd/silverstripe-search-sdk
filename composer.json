@@ -31,10 +31,8 @@
         "silverstripe/silverstripe-discoverer-search-ui": "0.3.0-alpha",
         "silverstripe/silverstripe-forager": "1.3.1",
         "silverstripe/silverstripe-forager-bifrost": "1.2.0",
-        "silverstripe/silverstripe-forager-elastic-enterprise": "1.1.0"
-    },
-    "suggest": {
-        "silverstripeltd/silverstripe-bifrost-admin": "Provides search administration for subscriptions on the Analyst plan or higher"
+        "silverstripe/silverstripe-forager-elastic-enterprise": "1.1.0",
+        "silverstripeltd/silverstripe-bifrost-admin": "0.1.0-beta"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
