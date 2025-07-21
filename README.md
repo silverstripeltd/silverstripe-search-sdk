@@ -15,6 +15,7 @@ Silverstripe Search is designed to integrate easily with the Silverstripe CMS. T
     * [Understanding your engine prefix and suffix:](#understanding-your-engine-prefix-and-suffix)
   * [Indexing your CMS content](#indexing-your-cms-content)
   * [Get search to your users](#get-search-to-your-users)
+  * [Administrative interface](#administrative-interface)
 <!-- TOC -->
 
 ## Tagged dependencies
@@ -133,3 +134,11 @@ You may or may not want to use the [Discoverer > Search UI](https://github.com/s
 * [Simple usage](https://github.com/silverstripeltd/silverstripe-discoverer/blob/main/docs/simple-usage.md): An example `SearchResults` Page, Controller, and template, with a basic query example with pagination and  result fields
 * [Detailed querying](https://github.com/silverstripeltd/silverstripe-discoverer/blob/main/docs/detailed-querying.md): How to query with filters, search fields, result fields, facets, etc
 * [Detailed result handling](https://github.com/silverstripeltd/silverstripe-discoverer/blob/main/docs/detailed-result-handling.md): More information about the `Results` object that Discoverer returns to you whenever you perform a search query
+
+## Administrative interface
+
+The `silverstripeltd/silverstripe-bifrost-admin` module is a suggested installation for those on Analyst plan or higher with [Silverstripe Search 1.0.0](https://search.silverstripe.cloud/resources/guides/category/changelog.html). The initial release lets you do the following:
+
+- See configured engines and their document count
+- View engine schema information
+- Manage Synonyms for an engine
