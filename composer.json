@@ -24,7 +24,7 @@
         "Software Development Kit"
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "silverstripe/silverstripe-discoverer": "dev-feature/v3-silverstripe-6 as 3.0.0",
         "silverstripe/silverstripe-discoverer-bifrost": "dev-feature/version-3-silverstripe-6 as 3.0.0",
         "silverstripe/silverstripe-discoverer-search-ui": "dev-feature/silverstripe-6 as 1.0.0",
