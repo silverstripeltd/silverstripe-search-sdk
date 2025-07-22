@@ -32,7 +32,7 @@
         "silverstripe/silverstripe-forager": "1.3.1",
         "silverstripe/silverstripe-forager-bifrost": "1.2.0",
         "silverstripe/silverstripe-forager-elastic-enterprise": "1.1.0",
-        "silverstripeltd/silverstripe-bifrost-admin": "0.1.0-beta"
+        "silverstripeltd/silverstripe-bifrost-admin": "0.1.1-beta"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
