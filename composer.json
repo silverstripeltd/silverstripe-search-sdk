@@ -25,15 +25,20 @@
     ],
     "require": {
         "php": "^8.1",
-        "silverstripe/silverstripe-discoverer": "2.1.0",
+        "silverstripe/silverstripe-discoverer": "2.1.1",
         "silverstripe/silverstripe-discoverer-bifrost": "2.0.1",
         "silverstripe/silverstripe-discoverer-elastic-enterprise": "2.1.1",
-        "silverstripe/silverstripe-discoverer-search-ui": "0.3.0-alpha",
-        "silverstripe/silverstripe-forager": "1.3.1",
-        "silverstripe/silverstripe-forager-bifrost": "1.2.0",
+        "silverstripe/silverstripe-discoverer-search-ui": "1.0.0",
+        "silverstripe/silverstripe-forager": "1.4.0",
+        "silverstripe/silverstripe-forager-bifrost": "1.2.1",
         "silverstripe/silverstripe-forager-elastic-enterprise": "1.1.0",
-        "silverstripeltd/silverstripe-bifrost-admin": "0.1.1-beta"
+        "silverstripeltd/silverstripe-bifrost-admin": "1.0.0"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-main": "3.0.x-dev"
+        }
+    }
 }
