@@ -47,7 +47,7 @@ Before you can get stared with this SDK you will need:
 
 ## Installation
 
-There are 4 core parts to the SDK:
+There are 3 core parts to the SDK:
 
 1. **Indexing:** Getting your CMS content indexed into the search engine
    - Provided by the [Forager](https://github.com/silverstripeltd/silverstripe-forager) module 
@@ -55,10 +55,8 @@ There are 4 core parts to the SDK:
    - Provided by the [Discoverer](https://github.com/silverstripeltd/silverstripe-discoverer) module 
 3. **Search UI:** A default implementation of a search results page with basic control over search options, designed to get you up and running quickly if you have basic search requirements
    - Provided by the [Discoverer > Search UI](https://github.com/silverstripeltd/silverstripe-discoverer-search-ui) module 
-4. **Admin:** A CMS user interface that provides some details about your search engines. Available features depend on your plan
-   - Provided by the [Bifrost > Admin](https://github.com/silverstripeltd/silverstripe-bifrost-admin) module
 
-**1. Indexing**, and **2. Querying**, and **4. Admin** are likely to be requirements for most projects, but **3. Search UI** potentially **isn't**. Some reasons why you might not want the Search UI include:
+**1. Indexing**, and **2. Querying** are likely to be requirements for most projects, but **3. Search UI** potentially **isn't**. Some reasons why you might not want the Search UI include:
 
 * You are using Subsites
 * You are using Fluent
@@ -139,8 +137,4 @@ You may or may not want to use the [Discoverer > Search UI](https://github.com/s
 
 ## Administrative interface
 
-The `silverstripeltd/silverstripe-bifrost-admin` module is installed by default as part of [Silverstripe Search 1.0.0](https://search.silverstripe.cloud/resources/guides/category/changelog.html). The initial release lets you do the following:
-
-- See configured engines and their document count
-- View engine schema information
-- Manage Synonyms for an engine (for Analyst plan users)
+The [Silverstripe Search Dashboard](https://dashboard.silverstripe.cloud/search) provides an interface for managing feature such as Synonyms, Curations, Analytics and Relevancy Tuning. Refer to the [User documentation](https://docs.search.silverstripe.cloud) for more information
