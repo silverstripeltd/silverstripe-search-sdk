@@ -27,7 +27,7 @@
         "php": "^8.3",
         "silverstripe/silverstripe-discoverer": "3.1.0",
         "silverstripe/silverstripe-discoverer-bifrost": "3.2.0",
-        "silverstripe/silverstripe-discoverer-search-ui": "2.0.2",
+        "silverstripe/silverstripe-discoverer-search-ui": "2.0.3",
         "silverstripe/silverstripe-forager": "2.0.4",
         "silverstripe/silverstripe-forager-bifrost": "2.1.0"
     },
